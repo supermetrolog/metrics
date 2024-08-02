@@ -4,6 +4,12 @@ services:
   prometheus:
     image: prom/prometheus:latest
     volumes:
-      - ./config/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
     ports:
       - "9090:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  prometheus-data:
