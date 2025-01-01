@@ -11,12 +11,8 @@ scrape_configs:
     scrape_interval: 10s
     static_configs:
       - targets: [
-        'host.docker.internal:9100',
-      ]
-        labels:
-          service: "localhost"
-      - targets: [
-        'outline-node-exporter.diani.ru'
+        'outline-node-exporter.diani.ru',
+        'cadvisory-exporter.diani.ru'
       ]
         labels:
           service: "vpn servers"

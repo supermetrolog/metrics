@@ -2,6 +2,7 @@ version: "3.2"
 
 services:
   prometheus:
+    restart: always
     image: prom/prometheus:latest
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml

@@ -2,6 +2,7 @@ version: "3.2"
 
 services:
   grafana:
+    restart: always
     image: grafana/grafana-oss:latest
     volumes:
       - grafana-data:/var/lib/grafana
