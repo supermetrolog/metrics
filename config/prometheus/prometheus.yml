@@ -12,6 +12,8 @@ scrape_configs:
     static_configs:
       - targets: [
         'outline-node-exporter.diani.ru',
+        'node-exporter.diani.ru',
+        'checker.atmlab.org',
         'cadvisory-exporter.diani.ru'
       ]
         labels:

@@ -1,0 +1,41 @@
+version: "3.2"
+
+services:
+  grafana:
+    restart: unless-stopped
+    image: grafana/grafana-oss:latest
+    volumes:
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+
+  prometheus:
+    restart: unless-stopped
+    image: prom/prometheus:latest
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    ports:
+      - "9090:9090"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  nodeexporter:
+    restart: unless-stopped
+    image: prom/node-exporter:latest
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+    network_mode: host
+    labels:
+      org.label-schema.group: "monitoring"
+
+volumes:
+  grafana-data:
+  prometheus-data:

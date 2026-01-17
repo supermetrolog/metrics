@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   nodeexporter:
-    restart: always
+    restart: unless-stopped
     image: prom/node-exporter:latest
     volumes:
       - /proc:/host/proc:ro

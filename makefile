@@ -6,26 +6,36 @@ push:
 pull:
 	git pull --rebase
 
+up:
+	docker-compose up -d
 
-dashboard-up:
-	docker-compose -f docker-compose.dashboard.yml up -d
-dashboard-down:
-	docker-compose -f docker-compose.dashboard.yml down --remove-orphans
-dashboard-restart: dashboard-down dashboard-up
+down:
+	docker-compose down --remove-orphans
 
+restart:
+	make down
+	make up
 
+up\:grafana:
+	docker-compose up -d grafana
+stop\:grafana:
+	docker-compose stop grafana
+restart\:grafana:
+	make stop:grafana
+	make up:grafana
 
-metrics-up:
-	docker-compose -f docker-compose.metrics.yml up -d
-metrics-down:
-	docker-compose -f docker-compose.metrics.yml down --remove-orphans
-metrics-restart: metrics-down metrics-up
+up\:prom:
+	docker-compose up -d prometheus
+stop\:prom:
+	docker-compose stop prometheus
+restart\:prom:
+	make stop:prom
+	make up:prom
 
-
-
-exporter-up:
-	docker-compose -f docker-compose.exporter.yml up -d
-exporter-down:
-	docker-compose -f docker-compose.exporter.yml down --remove-orphans
-exporter-restart: exporter-down exporter-up
-
+up\:exporter:
+	docker-compose up -d nodeexporter
+stop\:exporter:
+	docker-compose stop nodeexporter
+restart\:exporter:
+	make stop:exporter
+	make up:exporter
