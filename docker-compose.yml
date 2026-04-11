@@ -15,6 +15,9 @@ services:
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - prometheus-data:/prometheus
+    command:
+      - '--storage.tsdb.retention.time=3d'
+      - '--storage.tsdb.retention.size=1GB'
     ports:
       - "9090:9090"
     extra_hosts:
