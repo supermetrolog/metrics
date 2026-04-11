@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     image: prom/prometheus:latest
     volumes:
-      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./config/prometheus/prometheus.yml:/prometheus/prometheus.yml
       - prometheus-data:/prometheus
     command:
       - '--storage.tsdb.retention.time=3d'
